@@ -1,11 +1,11 @@
-const CACHE_NAME = 'lunch-roulette-v1';
+const CACHE_NAME = 'lunch-roulette-v2';
 const ASSETS = [
   './',
   './index.html',
   './manifest.json',
+  './sw.js',
   './점심 메뉴 룰렛 앱 아이콘.png',
-  './점심 메뉴 룰렛 오픈그래프 이미지.png',
-  'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js'
+  './점심 메뉴 룰렛 오픈그래프 이미지.png'
 ];
 
 self.addEventListener('install', (event) => {
@@ -37,6 +37,10 @@ self.addEventListener('fetch', (event) => {
 
       return fetch(event.request)
         .then((networkResponse) => {
+          if (!networkResponse || networkResponse.status !== 200 || networkResponse.type === 'opaque') {
+            return networkResponse;
+          }
+
           const responseClone = networkResponse.clone();
           caches.open(CACHE_NAME).then((cache) => {
             cache.put(event.request, responseClone);
