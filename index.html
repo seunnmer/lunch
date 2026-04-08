@@ -3,8 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>점심 룰렛</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <title>점심 메뉴 룰렛</title>
+  <meta name="description" content="먹고 싶은 메뉴를 추가하고 룰렛을 돌려 오늘의 점심 메뉴를 골라보세요." />
+  <meta name="theme-color" content="#89ddd2" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="점심 메뉴 룰렛" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="점심 메뉴 룰렛" />
+  <meta property="og:description" content="먹고 싶은 메뉴를 추가하고 룰렛을 돌려 오늘의 점심 메뉴를 정해보세요." />
+  <meta property="og:image" content="./점심 메뉴 룰렛 오픈그래프 이미지.png" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="점심 메뉴 룰렛" />
+  <meta name="twitter:description" content="먹고 싶은 메뉴를 추가하고 룰렛을 돌려 오늘의 점심 메뉴를 정해보세요." />
+  <meta name="twitter:image" content="./점심 메뉴 룰렛 오픈그래프 이미지.png" />
+  <link rel="icon" href="./점심 메뉴 룰렛 앱 아이콘.png" />
+  <link rel="apple-touch-icon" href="./점심 메뉴 룰렛 앱 아이콘.png" />
+  <link rel="manifest" href="./manifest.json" />
+  <script src="https://seunnmer.github.io/lunch/"></script>
   <style>
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
@@ -598,6 +615,14 @@
     });
 
     updateUI();
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch((error) => {
+          console.error('Service Worker registration failed:', error);
+        });
+      });
+    }
   </script>
 </body>
 </html>
